@@ -227,8 +227,14 @@ impl Display for Kmer {
     }
 }
 
+impl<'a> From<&EditableKmer<'a>> for Kmer {
+    fn from(ek: &EditableKmer) -> Self {
+        Kmer::from_editable_kmer(ek)
+    }
+}
+
 impl Kmer {
-    pub fn from_editable_kmer(ek: &EditableKmer) -> Self {
+    fn from_editable_kmer(ek: &EditableKmer) -> Self {
         Kmer::from_kmer_container(ek.__kc, ek.__index).unwrap()
     }
 
