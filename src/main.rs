@@ -1,10 +1,11 @@
 use kmer::*;
 
-
-
 fn main() {
-    let kc1 = KmerContainer::<3>::new();
-    println!("{:?}", kc1);
-    let kmer1 = Kmer::<3>::from_kmer_container(&kc1, 0);
-    println!("Hello, world! {:?}", kmer1)
+    let mut kc1 = KmerContainer::new(35);
+    let seq = "ACTGATGCATGCTATCATCTACTATCATACTGTCTAGCTATCTATCCTTAGCTATATCA";
+    kc1.eat(seq).unwrap();
+    let mut ek = kc1.get_editable_kmer(0).unwrap();
+    while ek.next().is_ok() {
+        println!("{}", ek);
+    }
 }
